@@ -47,6 +47,13 @@ def getInv(connection) -> list[Dict]:
     inventoryList = tuple_to_dict(inventoryList)
     return inventoryList
 
+def getItemObj(inventory:list[Dict], id:int) -> Item:
+    for item in inventory:
+        if item['id'] == id:
+            return Item((item['id'],item['name'],item['quantity']))
+    else:
+        return None
+
 
 
 

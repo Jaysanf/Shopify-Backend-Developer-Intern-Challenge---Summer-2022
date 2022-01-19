@@ -24,12 +24,21 @@
         <th scope="row">{{item["id"]}}</th>
         <td>{{item["name"]}}</td>
         <td>{{item["quantity"]}}</td>
+        
+        <td>
+          <form action="/edit" method="get">
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit" name="id" value = "{{item["id"]}}" >Edit Item</button>
+            </div> 
+          </form>
+        </td>
+
         <td>
           <form action="/delete" method="post">
             <div class="form-group">
-                <button class="btn btn-primary" type="submit" name="id" value = "{{item["id"]}}" >Delete Item</button>
-            </div> 
-            </form>
+              <button class="btn btn-primary" type="submit" name="id" value = "{{item["id"]}}" >Delete Item</button>
+            </div>
+          </form> 
         </td>
       </tr>
       {% endfor %}
