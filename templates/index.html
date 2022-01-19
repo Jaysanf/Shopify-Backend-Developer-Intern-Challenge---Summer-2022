@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Take Inventory
+{% endblock %}
+
+{% block main %}
+  
+
+  <table class="table">
+      <h6>Inventory </h6>
+    <thead>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Quantity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for item in inventoryList %}
+      <tr>
+        <th scope="row">{{item["id"]}}</th>
+        <td>{{item["name"]}}</td>
+        <td>{{item["quantity"]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
