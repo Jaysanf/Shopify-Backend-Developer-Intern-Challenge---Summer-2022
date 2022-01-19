@@ -1,11 +1,12 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from flask_session import Session
 from tempfile import mkdtemp
-import sqlite3
 
 from Item import Item
-from helpers import create_connection, apology, getInv, getItemObj
+from helpers import create_connection, apology, getInv, getItemObj, getMemObj
+
+
 
 
 DB_PATH = 'inventory.db'
@@ -102,3 +103,13 @@ def edit():
 
         inventoryList = getInv(my_connection)
         return render_template("index.html", inventoryList=inventoryList)
+
+
+@app.route("/export", methods=["POST"])
+def export():
+    if request.method == "POST":
+        mem = getMemObj(my_connection)
+        return send_file(mem,
+                    mimetype='text/csv',
+                    attachment_filename='MyInventory.csv',
+                    as_attachment=True)

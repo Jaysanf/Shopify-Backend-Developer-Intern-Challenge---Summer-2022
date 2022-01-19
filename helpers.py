@@ -1,8 +1,9 @@
 
-import imp
+from csv import DictWriter
 import sqlite3
 from typing import Dict, Tuple
 from flask import  render_template
+from io import StringIO, BytesIO
 
 from Item import Item
 
@@ -54,6 +55,23 @@ def getItemObj(inventory:list[Dict], id:int) -> Item:
     else:
         return None
 
+def getMemObj(connection):
+    fieldnames = ['id','name','quantity']
+    proxy = StringIO()
+
+
+    writer = DictWriter(proxy,fieldnames=fieldnames)
+    writer.writeheader()
+    inventory = getInv(connection)
+    writer.writerows(inventory)
+    mem = BytesIO()
+    mem.write(proxy.getvalue().encode())
+    # seeking was necessary. Python 3.5.2, Flask 0.12.2
+    mem.seek(0)
+    proxy.close()
+    return mem
+        
+        
 
 
 
