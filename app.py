@@ -1,7 +1,5 @@
 
 from flask import Flask, render_template, request, send_file
-from flask_session import Session
-from tempfile import mkdtemp
 
 from Item import Item
 from helpers import create_connection, apology, getInv, getItemObj, getMemObj
@@ -26,11 +24,6 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-# Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
 
 @app.route("/", methods=["GET", "POST"])
 def index():

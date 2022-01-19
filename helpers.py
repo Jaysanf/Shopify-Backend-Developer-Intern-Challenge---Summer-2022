@@ -59,7 +59,6 @@ def getMemObj(connection):
     fieldnames = ['id','name','quantity']
     proxy = StringIO()
 
-
     writer = DictWriter(proxy,fieldnames=fieldnames)
     writer.writeheader()
     inventory = getInv(connection)
