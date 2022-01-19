@@ -11,6 +11,7 @@
       <h6>Inventory </h6>
     <thead>
       <tr>
+        <th scope="col">ID</th>
         <th scope="col">Item</th>
         <th scope="col">Quantity</th>
       </tr>
@@ -22,9 +23,25 @@
         <th scope="row">{{item["id"]}}</th>
         <td>{{item["name"]}}</td>
         <td>{{item["quantity"]}}</td>
+        <td>
+          <form action="/delete" method="post">
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit" name="id" {{value = item["id"]}} >Delete Item</button>
+            </div> 
+        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <form action="/create" method="post">
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="name" placeholder="Item Name" type="text">
+        <input class="form-control" name="quantity" placeholder="Item Quantity" type="number">
+        <button class="btn btn-primary" type="submit">Create Item</button>
+    </div>  
+  </form>
+
+
 
 {% endblock %}

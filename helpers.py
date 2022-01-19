@@ -41,7 +41,11 @@ def tuple_to_dict(inventoryList: list[Tuple])-> list[Dict]:
             inventoryList[i] = myItem.getItemDict()
     return inventoryList
 
-
+def getInv(connection) -> list[Dict]:
+    inventoryCursor = connection.execute("SELECT * FROM inventory")
+    inventoryList = inventoryCursor.fetchall()
+    inventoryList = tuple_to_dict(inventoryList)
+    return inventoryList
 
 
 
