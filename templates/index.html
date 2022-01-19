@@ -9,6 +9,7 @@
 
   <table class="table">
       <h6>Inventory </h6>
+
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -26,12 +27,14 @@
         <td>
           <form action="/delete" method="post">
             <div class="form-group">
-                <button class="btn btn-primary" type="submit" name="id" {{value = item["id"]}} >Delete Item</button>
+                <button class="btn btn-primary" type="submit" name="id" value = "{{item["id"]}}" >Delete Item</button>
             </div> 
+            </form>
         </td>
       </tr>
       {% endfor %}
     </tbody>
+
   </table>
 
   <form action="/create" method="post">
@@ -41,7 +44,5 @@
         <button class="btn btn-primary" type="submit">Create Item</button>
     </div>  
   </form>
-
-
 
 {% endblock %}

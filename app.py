@@ -44,7 +44,6 @@ def create():
     if request.method == "POST":
         name=request.form.get("name") 
         quantity=request.form.get("quantity")
-
         if not name:
             return apology("must provide item name", 403)
         
@@ -60,17 +59,12 @@ def create():
 @app.route("/delete", methods=["POST"])
 def delete():
     if request.method == "POST":
-        name=request.form.get("name") 
-        quantity=request.form.get("quantity")
-
-        if not name:
-            return apology("must provide item name", 403)
+        item_id=request.form.get("id") 
+        if not item_id:
+            return apology("must provide item id", 403)
         
-        elif not quantity:
-            return apology("must provide quantity", 403)
-        item_to_add = Item((None,name,quantity))
 
-        my_connection.execute("INSERT INTO inventory (ItemName, ItemQuantity) VALUES (:name, :quantity)", item_to_add.getItemDict() )
+        my_connection.execute("DELETE FROM inventory where ItemID=:id", {'id':item_id} )
 
         inventoryList = getInv(my_connection)
         return render_template("index.html", inventoryList=inventoryList)
